@@ -1,3 +1,3 @@
-FROM alpine/git:latest
+FROM busybox:latest
 
-CMD ["/bin/bash"]
+CMD ["/bin/sh"]

@@ -2,21 +2,21 @@
 import os
 
 import aws_cdk as cdk
-import config
-from ecs.ecs_stack import Cluster
+from config import contextualize, Account, cnf
+from ecs.ecs_stack import PhantomService
 
 
 app = cdk.App()
 
-Cluster(
+PhantomService(
         app,
-        config.contextualize("ECS"),
-        stack_name=config.contextualize("troop"),
+        contextualize("ECS"),
+        stack_name=contextualize("ecs"),
         env=cdk.Environment(
-            account=config.aws.account_map["DEV"],
-            region=config.aws.region,
+            account=Account.DEV.value,
+            region=cnf.aws.region,
         ),
-        tags=config.aws.tags,
+        tags=cnf.aws.tags,
     )
 
 app.synth()
